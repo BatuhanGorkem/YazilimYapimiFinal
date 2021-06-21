@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80d1c639e8234c6e837120d5a2e9513b" Name="Diagram1">
+        <EntityTypeShape EntityType="BorsavtModel.BakiyeTalep" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BorsavtModel.Islem" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BorsavtModel.Kullanici" Width="1.5" PointX="0.875" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BorsavtModel.KullaniciUrun" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BorsavtModel.Talep" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BorsavtModel.Urun" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BorsavtModel.FK__BakiyeTal__Kulla__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="BorsavtModel.FK__Kullanici__Kulla__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="BorsavtModel.FK__Talep__Kullanici__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="BorsavtModel.FK__Kullanici__Uruni__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="BorsavtModel.FK__Talep__Urunid__5441852A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

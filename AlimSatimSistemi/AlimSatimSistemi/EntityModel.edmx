@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BorsavtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BakiyeTalep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kullaniciadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="TalepMiktari" Type="real" />
+        </EntityType>
+        <EntityType Name="Islem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Detay" Type="nvarchar" MaxLength="500" />
+          <Property Name="Tutar" Type="nvarchar" MaxLength="500" />
+          <Property Name="KalanTutar" Type="nvarchar" MaxLength="500" />
+          <Property Name="BirimFiyat" Type="nvarchar" MaxLength="500" />
+          <Property Name="IslemZamani" Type="date" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciAdi" />
+          </Key>
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="TC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eposta" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="50" />
+          <Property Name="UyeTuru" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bakiye" Type="real" />
+        </EntityType>
+        <EntityType Name="KullaniciUrun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Urunid" Type="int" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Onay" Type="int" />
+        </EntityType>
+        <EntityType Name="Talep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kullaniciadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Urunid" Type="int" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="BirimFiyat" Type="int" />
+          <Property Name="TalepTuru" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__BakiyeTal__Kulla__49C3F6B7">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="BakiyeTalep" Type="Self.BakiyeTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="BakiyeTalep">
+              <PropertyRef Name="Kullaniciadi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Kulla__4E88ABD4">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="KullaniciUrun" Type="Self.KullaniciUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="KullaniciUrun">
+              <PropertyRef Name="KullaniciAdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Uruni__5535A963">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="KullaniciUrun" Type="Self.KullaniciUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciUrun">
+              <PropertyRef Name="Urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Talep__Kullanici__5165187F">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Talep" Type="Self.Talep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="Talep">
+              <PropertyRef Name="Kullaniciadi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Talep__Urunid__5441852A">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Talep" Type="Self.Talep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Talep">
+              <PropertyRef Name="Urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BorsavtModelStoreContainer">
+          <EntitySet Name="BakiyeTalep" EntityType="Self.BakiyeTalep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Islem" EntityType="Self.Islem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciUrun" EntityType="Self.KullaniciUrun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Talep" EntityType="Self.Talep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BakiyeTal__Kulla__49C3F6B7" Association="Self.FK__BakiyeTal__Kulla__49C3F6B7">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="BakiyeTalep" EntitySet="BakiyeTalep" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Kulla__4E88ABD4" Association="Self.FK__Kullanici__Kulla__4E88ABD4">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="KullaniciUrun" EntitySet="KullaniciUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Uruni__5535A963" Association="Self.FK__Kullanici__Uruni__5535A963">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="KullaniciUrun" EntitySet="KullaniciUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Talep__Kullanici__5165187F" Association="Self.FK__Talep__Kullanici__5165187F">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Talep" EntitySet="Talep" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Talep__Urunid__5441852A" Association="Self.FK__Talep__Urunid__5441852A">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Talep" EntitySet="Talep" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BorsavtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BakiyeTalep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kullaniciadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TalepMiktari" Type="Single" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__BakiyeTal__Kulla__49C3F6B7" FromRole="BakiyeTalep" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Islem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detay" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Tutar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KalanTutar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BirimFiyat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IslemZamani" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciAdi" />
+          </Key>
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UyeTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bakiye" Type="Single" />
+          <NavigationProperty Name="BakiyeTalepleri" Relationship="Self.FK__BakiyeTal__Kulla__49C3F6B7" FromRole="Kullanici" ToRole="BakiyeTalep" />
+          <NavigationProperty Name="KullaniciUrunleri" Relationship="Self.FK__Kullanici__Kulla__4E88ABD4" FromRole="Kullanici" ToRole="KullaniciUrun" />
+          <NavigationProperty Name="Talepler" Relationship="Self.FK__Talep__Kullanici__5165187F" FromRole="Kullanici" ToRole="Talep" />
+        </EntityType>
+        <EntityType Name="KullaniciUrun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Urunid" Type="Int32" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Onay" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__Kullanici__Kulla__4E88ABD4" FromRole="KullaniciUrun" ToRole="Kullanici" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK__Kullanici__Uruni__5535A963" FromRole="KullaniciUrun" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Talep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kullaniciadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Urunid" Type="Int32" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="BirimFiyat" Type="Int32" />
+          <Property Name="TalepTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__Talep__Kullanici__5165187F" FromRole="Talep" ToRole="Kullanici" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK__Talep__Urunid__5441852A" FromRole="Talep" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KullaniciUrunleri" Relationship="Self.FK__Kullanici__Uruni__5535A963" FromRole="Urun" ToRole="KullaniciUrun" />
+          <NavigationProperty Name="Talepler" Relationship="Self.FK__Talep__Urunid__5441852A" FromRole="Urun" ToRole="Talep" />
+        </EntityType>
+        <Association Name="FK__BakiyeTal__Kulla__49C3F6B7">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="BakiyeTalep" Type="Self.BakiyeTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="BakiyeTalep">
+              <PropertyRef Name="Kullaniciadi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Kulla__4E88ABD4">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="KullaniciUrun" Type="Self.KullaniciUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="KullaniciUrun">
+              <PropertyRef Name="KullaniciAdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Talep__Kullanici__5165187F">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Talep" Type="Self.Talep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciAdi" />
+            </Principal>
+            <Dependent Role="Talep">
+              <PropertyRef Name="Kullaniciadi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Uruni__5535A963">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="KullaniciUrun" Type="Self.KullaniciUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciUrun">
+              <PropertyRef Name="Urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Talep__Urunid__5441852A">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Talep" Type="Self.Talep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Talep">
+              <PropertyRef Name="Urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BorsavtDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BakiyeTalepleri" EntityType="Self.BakiyeTalep" />
+          <EntitySet Name="Islemler" EntityType="Self.Islem" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanici" />
+          <EntitySet Name="KullaniciUrunleri" EntityType="Self.KullaniciUrun" />
+          <EntitySet Name="Talepler" EntityType="Self.Talep" />
+          <EntitySet Name="Urunler" EntityType="Self.Urun" />
+          <AssociationSet Name="FK__BakiyeTal__Kulla__49C3F6B7" Association="Self.FK__BakiyeTal__Kulla__49C3F6B7">
+            <End Role="Kullanici" EntitySet="Kullanicilar" />
+            <End Role="BakiyeTalep" EntitySet="BakiyeTalepleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Kulla__4E88ABD4" Association="Self.FK__Kullanici__Kulla__4E88ABD4">
+            <End Role="Kullanici" EntitySet="Kullanicilar" />
+            <End Role="KullaniciUrun" EntitySet="KullaniciUrunleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Talep__Kullanici__5165187F" Association="Self.FK__Talep__Kullanici__5165187F">
+            <End Role="Kullanici" EntitySet="Kullanicilar" />
+            <End Role="Talep" EntitySet="Talepler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Uruni__5535A963" Association="Self.FK__Kullanici__Uruni__5535A963">
+            <End Role="Urun" EntitySet="Urunler" />
+            <End Role="KullaniciUrun" EntitySet="KullaniciUrunleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Talep__Urunid__5441852A" Association="Self.FK__Talep__Urunid__5441852A">
+            <End Role="Urun" EntitySet="Urunler" />
+            <End Role="Talep" EntitySet="Talepler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BorsavtModelStoreContainer" CdmEntityContainer="BorsavtDb">
+          <EntitySetMapping Name="BakiyeTalepleri">
+            <EntityTypeMapping TypeName="BorsavtModel.BakiyeTalep">
+              <MappingFragment StoreEntitySet="BakiyeTalep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kullaniciadi" ColumnName="Kullaniciadi" />
+                <ScalarProperty Name="TalepMiktari" ColumnName="TalepMiktari" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Islemler">
+            <EntityTypeMapping TypeName="BorsavtModel.Islem">
+              <MappingFragment StoreEntitySet="Islem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Detay" ColumnName="Detay" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="KalanTutar" ColumnName="KalanTutar" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="IslemZamani" ColumnName="IslemZamani" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="BorsavtModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="UyeTuru" ColumnName="UyeTuru" />
+                <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciUrunleri">
+            <EntityTypeMapping TypeName="BorsavtModel.KullaniciUrun">
+              <MappingFragment StoreEntitySet="KullaniciUrun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Urunid" ColumnName="Urunid" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Onay" ColumnName="Onay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Talepler">
+            <EntityTypeMapping TypeName="BorsavtModel.Talep">
+              <MappingFragment StoreEntitySet="Talep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kullaniciadi" ColumnName="Kullaniciadi" />
+                <ScalarProperty Name="Urunid" ColumnName="Urunid" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="TalepTuru" ColumnName="TalepTuru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunler">
+            <EntityTypeMapping TypeName="BorsavtModel.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

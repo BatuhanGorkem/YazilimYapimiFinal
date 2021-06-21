@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BorsavtModelStoreContainer" CdmEntityContainer="BorsavtDb">
+    <EntitySetMapping Name="BakiyeTalepleri">
+      <EntityTypeMapping TypeName="BorsavtModel.BakiyeTalep">
+        <MappingFragment StoreEntitySet="BakiyeTalep">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kullaniciadi" ColumnName="Kullaniciadi" />
+          <ScalarProperty Name="TalepMiktari" ColumnName="TalepMiktari" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Islemler">
+      <EntityTypeMapping TypeName="BorsavtModel.Islem">
+        <MappingFragment StoreEntitySet="Islem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Detay" ColumnName="Detay" />
+          <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+          <ScalarProperty Name="KalanTutar" ColumnName="KalanTutar" />
+          <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+          <ScalarProperty Name="IslemZamani" ColumnName="IslemZamani" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicilar">
+      <EntityTypeMapping TypeName="BorsavtModel.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="UyeTuru" ColumnName="UyeTuru" />
+          <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KullaniciUrunleri">
+      <EntityTypeMapping TypeName="BorsavtModel.KullaniciUrun">
+        <MappingFragment StoreEntitySet="KullaniciUrun">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Urunid" ColumnName="Urunid" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="Onay" ColumnName="Onay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Talepler">
+      <EntityTypeMapping TypeName="BorsavtModel.Talep">
+        <MappingFragment StoreEntitySet="Talep">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kullaniciadi" ColumnName="Kullaniciadi" />
+          <ScalarProperty Name="Urunid" ColumnName="Urunid" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+          <ScalarProperty Name="TalepTuru" ColumnName="TalepTuru" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urunler">
+      <EntityTypeMapping TypeName="BorsavtModel.Urun">
+        <MappingFragment StoreEntitySet="Urun">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
